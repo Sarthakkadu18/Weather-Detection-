@@ -1,0 +1,342 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+:root {
+    --bg-color-dark: #1e1e2f;
+    --card-bg-dark: rgba(30, 30, 47, 0.7);
+    --text-color-dark: #f0f0f0;
+    --input-bg-dark: rgba(255, 255, 255, 0.1);
+    --input-placeholder-dark: #aaa;
+    --btn-bg-dark: #6a6a8e;
+
+    --bg-color-light: #e0f7fa;
+    --card-bg-light: rgba(255, 255, 255, 0.5);
+    --text-color-light: #333;
+    --input-bg-light: rgba(255, 255, 255, 0.8);
+    --input-placeholder-light: #666;
+    --btn-bg-light: #00796b;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    margin: 0;
+    color: var(--text-color-dark);
+    background-color: var(--bg-color-dark);
+    transition: background-color 0.5s ease, color 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+body.light-theme {
+    color: var(--text-color-light);
+    background-color: var(--bg-color-light);
+}
+
+.background-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(45deg, #1e3c72, #2a5298);
+    transition: background 1s ease-in-out;
+}
+
+/* Animations for different weather conditions */
+.background-animation.clear-sky {
+    background: linear-gradient(135deg, #87ceeb, #00bfff);
+}
+.background-animation.clear-sky-night {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+.background-animation.clouds {
+    background: linear-gradient(135deg, #708090, #5a6a7c);
+    animation: moveClouds 20s linear infinite;
+    background-size: 200% 200%;
+}
+.background-animation.rain {
+    background: linear-gradient(135deg, #5c626b, #333);
+    animation: moveRain 0.5s linear infinite;
+}
+@keyframes moveClouds {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes moveRain {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: -20% 100%;
+    }
+}
+
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.weather-card {
+    background: var(--card-bg-dark);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    padding: 30px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    text-align: center;
+    width: 100%;
+    perspective: 1000px; /* 3D perspective for hover effect */
+    transition: transform 0.3s ease;
+}
+
+.weather-card:hover {
+    transform: rotateY(5deg) rotateX(5deg);
+}
+
+body.light-theme .weather-card {
+    background: var(--card-bg-light);
+}
+
+.app-title {
+    font-size: 2.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#city-input {
+    flex-grow: 1;
+    padding: 12px 18px;
+    border-radius: 50px;
+    border: none;
+    background: var(--input-bg-dark);
+    color: var(--text-color-dark);
+    font-size: 1em;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+body.light-theme #city-input {
+    background: var(--input-bg-light);
+    color: var(--text-color-light);
+}
+
+#city-input::placeholder {
+    color: var(--input-placeholder-dark);
+}
+
+body.light-theme #city-input::placeholder {
+    color: var(--input-placeholder-light);
+}
+
+#city-input:focus {
+    box-shadow: 0 0 0 3px #00aaff;
+}
+
+#search-btn {
+    background: var(--btn-bg-dark);
+    color: var(--text-color-dark);
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+body.light-theme #search-btn {
+    background: var(--btn-bg-light);
+    color: #fff;
+}
+
+#search-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#search-btn svg {
+    width: 24px;
+    height: 24px;
+}
+
+#weather-info {
+    text-align: left;
+    transform: translateZ(20px);
+    transition: transform 0.3s ease;
+}
+
+.weather-header {
+    margin-bottom: 15px;
+}
+
+#city-name {
+    font-size: 2.2em;
+    margin: 0;
+    font-weight: 700;
+}
+
+#weather-condition {
+    font-size: 1.2em;
+    color: #b0b0b0;
+    margin: 5px 0;
+}
+
+body.light-theme #weather-condition {
+    color: #666;
+}
+
+.weather-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.icon-temp-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#weather-icon {
+    width: 100px;
+    height: 100px;
+    filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.4));
+}
+
+.animated-icon {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+#temperature {
+    font-size: 4em;
+    font-weight: 700;
+    margin: 0;
+}
+
+.additional-info {
+    text-align: right;
+}
+
+.info-item {
+    margin-bottom: 10px;
+}
+
+.info-item p {
+    font-size: 0.9em;
+    margin: 0 0 5px 0;
+}
+
+.info-item span {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.hidden {
+    display: none;
+}
+
+#error-message {
+    font-size: 1.2em;
+    color: #e57373;
+    margin-top: 20px;
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transform: translateZ(50px);
+}
+
+.theme-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.switch-label {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: #333;
+    border-radius: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s ease;
+}
+
+.switch-label .sun, .switch-label .moon {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.switch-label .slider {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+    left: 3px;
+}
+
+#theme-switch:checked + .switch-label {
+    background: #6a6a8e;
+}
+
+#theme-switch:checked + .switch-label .slider {
+    transform: translateX(30px);
+}
+
+@media (max-width: 500px) {
+    .weather-card {
+        padding: 20px;
+    }
+    .app-title {
+        font-size: 2em;
+    }
+    #city-name {
+        font-size: 1.8em;
+    }
+    #temperature {
+        font-size: 3em;
+    }
+    .weather-details {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .icon-temp-group {
+        flex-direction: column;
+    }
+    .additional-info {
+        text-align: center;
+    }
+}

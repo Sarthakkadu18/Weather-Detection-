@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-animation"></div>
+
+    <div class="container">
+        <div class="theme-toggle" id="theme-toggle">
+            <input type="checkbox" id="theme-switch" />
+            <label for="theme-switch" class="switch-label">
+                <span class="sun">☀️</span>
+                <span class="moon">🌙</span>
+                <div class="slider"></div>
+            </label>
+        </div>
+        
+        <div class="weather-card">
+            <h1 class="app-title">Weather App</h1>
+            <div class="search-box">
+                <input type="text" id="city-input" placeholder="Enter city name..." spellcheck="false">
+                <button id="search-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </div>
+            
+            <div id="weather-info" class="hidden">
+                <div class="weather-header">
+                    <h2 id="city-name"></h2>
+                    <p id="weather-condition"></p>
+                </div>
+                <div class="weather-details">
+                    <div class="icon-temp-group">
+                        <img id="weather-icon" src="" alt="Weather Icon" class="animated-icon">
+                        <p id="temperature"></p>
+                    </div>
+                    <div class="additional-info">
+                        <div class="info-item">
+                            <p>Humidity</p>
+                            <span id="humidity"></span>
+                        </div>
+                        <div class="info-item">
+                            <p>Wind Speed</p>
+                            <span id="wind-speed"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="error-message" class="hidden">
+                <p>City not found. Please try again.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
